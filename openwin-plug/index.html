@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<title>会员管理首页</title>
+	<style type="text/css">
+		*{margin:0;padding: 0;}
+		html,body{height: 100%;}
+		.window_boundingBox{
+			position: absolute;z-index: 9999;
+		/*	width: 500px;height: 90px;margin-left: -250px;*/
+			background-color: #f5f5f5;border: 1px solid #ccc;
+		}
+
+		.window_header{
+			height: 30px;line-height: 30px;
+			background-color:#000;
+			color: #fff;
+		}
+		.window_closeBtn{
+			position: absolute;right: 0;top: 0;z-index: 1;
+			width: 20px;height: 20px;background-color: red;
+			text-align: center;line-height: 10px;
+			cursor: pointer;
+		}
+
+		/*皮肤定制*/
+		.window_boundingBox_a{
+			background-color: #fff;
+		}
+
+		.window_boundingBox_a .window_header{
+			background-color: #ccc;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.window_boundingBox_a .window_closeBtn{
+			height: 24px;height: 24px;line-height: 24px;
+			background-color: red;
+			border-radius: 50%;
+			color: #fff;
+		}
+		.window_boundingBox_a .window_footer{
+			position: absolute;left: 0;bottom:0;z-index: 1;
+			height: 20px;width: 100%;
+			border-top: 1px solid #ccc;
+			text-align: right;
+		}
+
+		.window_mask{
+			position: absolute;left: 0;top: 0;right: 0;bottom: 0;
+			width: 100%;height: 100%;
+			background: #000;opacity: 0.3;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<button class="btn">加载弹窗</button>
+		<p class="dat">dadwad</p>
+	</div>
+	<!-- <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script> -->
+	<!-- <script src="http://rap.taobao.org/rap.plugin.js?projectId=1515"></script> -->
+	<script type="text/javascript" src="require.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+	
+	<script type="text/javascript">
+		//ajax 操作
+		// $('.btn').click(function() {
+		// 		$.getJSON('/api/freights', function(response) {
+		// 			console.log(response.data);
+		// 			console.log(response.meta);
+		// 			var dat = response.data[1].publishdate;
+		// 			$('.dat').html(dat); 
+		// 		});
+
+		// 	});
+		require(['jquery','win'],function($,w){
+			$('.btn').click(function() {
+				var win = new w.Window();
+				win.alert({
+					title : '这个标题',
+					content: 'hello world',
+					width: 300,
+					height: 150,
+					y: 50,
+					hasCloseBtn: true,
+					dragHandle: '.window_header',
+					skinClassName: 'window_boundingBox_a',
+					text4AlertBtn: '保存',
+					handler4AlertBtn: function (){
+						alert("you click the alert btn");
+						mask && mask.remove();
+						// that.fire("alert");
+					},
+					handler4CloseBtn: function (){
+						alert("you click the close btn");
+						mask && mask.remove();
+						// that.fire("close");
+					}
+				}).on('alert', function() {
+					alert("the second alert handler");
+				}).on('alert', function() {
+					alert("the third alert handler");
+				}).on('close', function() {
+					alert("the second close handler");
+				});
+
+				// win.on('alert', function() {
+				// 	alert("the second alert handler");
+				// });
+				// win.on('alert', function() {
+				// 	alert("the third alert handler");
+				// });
+				// win.on('close', function() {
+				// 	alert("the second close handler");
+				// });
+			});
+
+			// $('.btn').click(function() {
+			// 	$.get(' /api/freights', function(data) {
+			// 		console.log(data);
+			// 	});
+			// });
+			
+		})		
+	</script>
+</body>
+</html>
